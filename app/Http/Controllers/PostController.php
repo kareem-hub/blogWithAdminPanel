@@ -16,10 +16,6 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        // Eager Loading
-        // $posts = Post::latest()->with('category')->get();
-        // return view('posts.index', compact('posts'));
-
         $term = $request->term ?? "";
         if ($term != "") {
             $posts = Post::where('title', 'LIKE', '%' . $term . '%')->with('category')->paginate(3);

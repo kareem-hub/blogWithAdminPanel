@@ -17,12 +17,12 @@ use App\Http\Middleware\IsAdminMiddleware;
 |
 */
 
-// project 1 admin
+// no auth
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/post/{post}', [HomeController::class, 'showPost'])->name('home.showPost');
 
-
+// only auth
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('categories', CategoryController::class)->middleware(IsAdminMiddleware::class);
     Route::resource('posts', PostController::class)->middleware(IsAdminMiddleware::class);
