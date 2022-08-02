@@ -34,7 +34,7 @@
             <div
                 class="basis-1/4 m-5 p-6 max-w bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                 <a href="#">
-                    <h5 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    <h5 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">
                         {{ $post->title }}
                     </h5>
                     <small class="text-gray-500">{{ $post->category->name }}</small>

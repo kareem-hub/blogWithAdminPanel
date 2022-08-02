@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\dashboard\UsersController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,7 @@ Route::get('/post/{post}', [HomeController::class, 'showPost'])->name('home.show
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('categories', CategoryController::class)->middleware(IsAdminMiddleware::class);
     Route::resource('posts', PostController::class)->middleware(IsAdminMiddleware::class);
+    Route::resource('users', UsersController::class)->middleware(IsAdminMiddleware::class);
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');

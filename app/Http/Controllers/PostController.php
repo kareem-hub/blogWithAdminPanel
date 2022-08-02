@@ -6,6 +6,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -73,8 +74,12 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        $categories = Category::all();
-        return view('posts.edit', compact('post', 'categories'));
+        if (auth()->user()->can('edit posts')) {
+            $categories = Category::all();
+            return view('posts.edit', compact('post', 'categories'));
+        } else {
+            return redirect()->route('posts.index');
+        }
     }
 
     /**
@@ -103,7 +108,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $post->delete();
+        if (auth()->user()->can('delete posts'))
+            $post->delete();
         return redirect()->route('posts.index');
     }
 }
